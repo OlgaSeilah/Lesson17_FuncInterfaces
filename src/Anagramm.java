@@ -29,16 +29,20 @@ public class Anagramm {
         Map<Character, Integer> wordLettersMap = countLetters(word);
         Map<Character, Integer> anagramLettersMap = countLetters(anagram);
 
-        for (Map.Entry<Character, Integer> lettersInInsideWord : anagramLettersMap.entrySet()) {
-           if(wordLettersMap.containsKey(lettersInInsideWord.getKey())) {
-              if (lettersInInsideWord.getValue() <= wordLettersMap.get(lettersInInsideWord.getKey())) {
-                  continue;
-              } else {
-                  return false;
-              }
-           } else {
-               return false;
-           }
+        for (Map.Entry<Character, Integer> entry : anagramLettersMap.entrySet()) {
+
+            if (wordLettersMap.containsKey(entry.getKey())) {
+                if (!Character.isLetter(entry.getKey())) {
+                    return false;
+                }
+                if (entry.getValue() <= wordLettersMap.get(entry.getKey())) {
+                    continue;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
         return true;
     }
@@ -49,7 +53,7 @@ public class Anagramm {
         StringBuilder sb = new StringBuilder(word);
         for (int i = 0; i < sb.length(); i++) {
             char letter = sb.charAt(i);
-            if(countOfLettersInOriginalWord.containsKey(letter)) {
+            if (countOfLettersInOriginalWord.containsKey(letter)) {
                 countOfLettersInOriginalWord.put(letter, countOfLettersInOriginalWord.get(letter) + 1);
             } else {
                 countOfLettersInOriginalWord.put(letter, 1);
