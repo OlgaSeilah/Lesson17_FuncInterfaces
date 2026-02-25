@@ -24,6 +24,7 @@ public class Anagramm {
 
     public static boolean isAnagram(String word, String anagram) {
         if (word.isEmpty() || anagram.isEmpty()) return false;
+        if (word.length() < anagram.length()) return false;
 
         Map<Character, Integer> wordLettersMap = countLetters(word);
         Map<Character, Integer> anagramLettersMap = countLetters(anagram);
